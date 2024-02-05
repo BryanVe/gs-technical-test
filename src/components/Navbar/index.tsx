@@ -1,12 +1,12 @@
 import { Container, Image, Navbar } from 'react-bootstrap'
 
-type NavbarProps = {
+type InternalNavbarProps = {
 	logoAlt: string
 	logoSrc: string
 	logoHeight?: number
 }
 
-const InternalNavbar: React.FC<NavbarProps> = props => {
+const InternalNavbar: React.FC<InternalNavbarProps> = props => {
 	const { logoAlt, logoSrc, logoHeight = 30 } = props
 
 	return (
