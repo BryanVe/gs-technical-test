@@ -23,7 +23,9 @@ const App = () => {
 				<Row>
 					<Col>
 						<div className="dt-title">
-							<h1 className="h2">Mi tabla</h1>
+							<h1 className="h2">
+								<strong>Mi tabla</strong>
+							</h1>
 						</div>
 					</Col>
 					<Col xs="auto">
