@@ -1,7 +1,7 @@
 {
   "name": "gs-technical-test",
   "private": true,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "tsc": "bash -c tsc"
+    "tsc": "bash -c tsc",
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -24,11 +25,20 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
   "volta": {
     "node": "20.11.0"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm lint",
+      "pnpm tsc"
+    ],
+    "**/*": "pnpm format"
   }
 }
