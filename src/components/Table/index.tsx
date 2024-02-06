@@ -55,7 +55,9 @@ function Table<TDataItem extends TableDefaultDataItem>(
 								<Form.Check type='checkbox' />
 							</th>
 							{columns.map(column => (
-								<th key={column.id}>{column.label}</th>
+								<th key={column.id} style={column.thStyle}>
+									{column.label}
+								</th>
 							))}
 						</tr>
 					</thead>

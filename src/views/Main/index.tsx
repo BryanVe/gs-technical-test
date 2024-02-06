@@ -11,6 +11,9 @@ const columns: TableColumns<User> = [
 	{
 		id: 'name',
 		label: 'Nombre',
+		thStyle: {
+			minWidth: 120
+		},
 		tdStyle: {
 			minWidth: 150
 		}
@@ -22,11 +25,17 @@ const columns: TableColumns<User> = [
 	},
 	{
 		id: 'email',
-		label: 'Correo electrónico'
+		label: 'Correo electrónico',
+		thStyle: {
+			minWidth: 150
+		}
 	},
 	{
 		id: 'cell',
 		label: 'Celular',
+		thStyle: {
+			minWidth: 150
+		},
 		tdStyle: {
 			minWidth: 150
 		}
