@@ -25,3 +25,8 @@
 .dropdown .dropdown-item {
 	font-size: 0.78rem;
 }
+
+.dropdown-menu.show {
+	max-height: 300px;
+	overflow: auto;
+}

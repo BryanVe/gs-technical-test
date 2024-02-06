@@ -33,7 +33,7 @@ const Select: FC<SelectProps> = props => {
 				{value.toUpperCase()}
 			</Dropdown.Toggle>
 			<Dropdown.Menu className='w-100 mt-2'>
-				<div className='px-2'>
+				<div className='px-2 position-sticky sticky-top'>
 					<SearchInput
 						autoFocus
 						className='w-100 mb-3'
