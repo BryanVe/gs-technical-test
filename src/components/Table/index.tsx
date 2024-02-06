@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { Table as BSTable, Form, FormControlProps } from 'react-bootstrap'
-import { Input, SearchInput } from '~/components'
+import { Input } from '~/components'
 import { EmptyMessage, LoadingMessage, Pagination } from './components'
 import './styles.css'
 
@@ -64,7 +64,11 @@ function Table<TDataItem extends TableDefaultDataItem>(
 
 	return (
 		<>
-			<SearchInput value={searchString} onChange={handleSearchStringChange} />
+			<Input
+				variant='search'
+				value={searchString}
+				onChange={handleSearchStringChange}
+			/>
 			<div
 				style={{
 					height,
