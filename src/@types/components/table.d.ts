@@ -1,14 +1,14 @@
+type TableMode = 'read' | 'edit'
 type TableDefaultDataItem = {
 	id: string
 	[key: string]: unknown
 }
 
-type TableColumns<TDataItem extends TableDefaultDataItem> = {
+type TableColumns = {
 	id: string
 	label: string
 	path?: string
 	tdClassName?: string
 	thStyle?: React.HTMLProps<HTMLTableHeaderCellElement>['style']
 	tdStyle?: React.HTMLProps<HTMLTableDataCellElement>['style']
-	render?: (data: TDataItem) => import('react').ReactNode
 }[]

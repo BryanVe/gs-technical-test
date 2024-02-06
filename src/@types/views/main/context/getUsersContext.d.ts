@@ -9,4 +9,7 @@ type TGetUsersContext = Required<GetUsersParams> & {
 	selectAllUsers: () => void
 	selectedUserIDs: string[]
 	removeUsers: () => void
+	updateUsersTableMode: (mode: TableMode) => void
+	usersTableMode: TableMode
+	handleUserInputsChange: (user: User, key: string, value: string) => void
 }

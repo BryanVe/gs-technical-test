@@ -1,12 +1,13 @@
 import { ReactNode, useState } from 'react'
 import { Table as BSTable, Form, FormControlProps } from 'react-bootstrap'
-import { SearchInput } from '~/components'
+import { Input, SearchInput } from '~/components'
 import { EmptyMessage, LoadingMessage, Pagination } from './components'
 import './styles.css'
 
 type TableProps<TDataItem extends TableDefaultDataItem> = {
+	mode?: TableMode
 	loadingData?: boolean
-	columns: TableColumns<TDataItem>
+	columns: TableColumns
 	data?: TDataItem[]
 	height?: number
 	enablePagination?: boolean
@@ -16,23 +17,26 @@ type TableProps<TDataItem extends TableDefaultDataItem> = {
 	selectItem: (item: TDataItem) => void
 	selectAllItems: () => void
 	selectedItemIDs: string[]
+	onItemInputsChange: (item: TDataItem, key: string, value: string) => void
 }
 
 function Table<TDataItem extends TableDefaultDataItem>(
 	props: TableProps<TDataItem>
 ) {
 	const {
+		mode = 'read',
 		loadingData = false,
 		columns,
 		enablePagination = false,
 		data,
 		height = 300,
 		page,
+		selectedItemIDs,
 		updatePage,
 		updateResults,
 		selectItem,
 		selectAllItems,
-		selectedItemIDs
+		onItemInputsChange
 	} = props
 	const [searchString, setSearchString] = useState('')
 	const filteredData = (data ?? []).filter(
@@ -92,9 +96,21 @@ function Table<TDataItem extends TableDefaultDataItem>(
 											className={column.tdClassName}
 											style={column.tdStyle}
 										>
-											{column.render
-												? column.render(item)
-												: (item[column.id] as ReactNode)}
+											{mode === 'read' ? (
+												(item[column.id] as ReactNode)
+											) : (
+												<Input
+													size='sm'
+													value={item[column.id] as string}
+													onChange={event =>
+														onItemInputsChange(
+															item,
+															column.id,
+															event.target.value
+														)
+													}
+												/>
+											)}
 										</td>
 									))}
 								</tr>

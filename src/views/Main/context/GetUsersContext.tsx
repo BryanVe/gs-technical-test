@@ -17,6 +17,7 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 	})
 	const [selectedUserIDs, setSelectedUserIDs] = useState<string[]>([])
 	const [editableUsers, setEditableUsers] = useState<Record<string, User>>({})
+	const [usersTableMode, setUsersTableMode] = useState<TableMode>('read')
 	const editableUsersAsArray = Object.values(editableUsers)
 	const { isLoading: loadingUsers } = useQuery({
 		queryKey: [
@@ -46,11 +47,13 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 		placeholderData: keepPreviousData
 	})
 
-	const updateSearchParams = (key: keyof GetUsersParams, value: string) =>
+	const updateSearchParams = (key: keyof GetUsersParams, value: string) => {
+		setSelectedUserIDs([])
 		setSearchParams(previousSearchParams => ({
 			...previousSearchParams,
 			[key]: value
 		}))
+	}
 
 	const updatePage: TGetUsersContext['updatePage'] = page =>
 		updateSearchParams('page', page)
@@ -64,7 +67,7 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 	const updateNat: TGetUsersContext['updateNat'] = nat =>
 		updateSearchParams('nat', nat)
 
-	const selectUser = (user: User) => {
+	const selectUser: TGetUsersContext['selectUser'] = user => {
 		const isSelected = selectedUserIDs.includes(user.id)
 		let newSelectedUserIDs: string[] = []
 
@@ -92,7 +95,24 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 		}
 
 		setEditableUsers(newEditableUsers)
+		setSelectedUserIDs([])
 	}
+
+	const updateUsersTableMode: TGetUsersContext['updateUsersTableMode'] = mode =>
+		setUsersTableMode(mode)
+
+	const handleUserInputsChange: TGetUsersContext['handleUserInputsChange'] = (
+		user,
+		key,
+		value
+	) =>
+		setEditableUsers(editableUsers => ({
+			...editableUsers,
+			[user.id]: {
+				...editableUsers[user.id],
+				[key]: value
+			}
+		}))
 
 	return (
 		<GetUsersContext.Provider
@@ -107,7 +127,10 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 				selectUser,
 				selectAllUsers,
 				selectedUserIDs,
-				removeUsers
+				removeUsers,
+				usersTableMode,
+				updateUsersTableMode,
+				handleUserInputsChange
 			}}
 		>
 			{children}

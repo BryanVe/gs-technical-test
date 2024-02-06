@@ -18,9 +18,8 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = props => {
 	const { toggleExpandedFilters } = props
-	const { selectedUserIDs, removeUsers } = useContext(
-		GetUsersContext
-	) as TGetUsersContext
+	const { selectedUserIDs, removeUsers, usersTableMode, updateUsersTableMode } =
+		useContext(GetUsersContext) as TGetUsersContext
 	const disableAction = selectedUserIDs.length === 0
 	const actions: Action[] = [
 		{
@@ -31,12 +30,12 @@ const Header: FC<HeaderProps> = props => {
 			onClick: toggleExpandedFilters
 		},
 		{
-			icon: 'bi-pencil',
-			label: 'Editar',
+			icon: usersTableMode === 'edit' ? 'bi-save2' : 'bi-pencil',
+			label: usersTableMode === 'edit' ? 'Guardar' : 'Editar',
 			size: 'sm',
-			variant: disableAction ? 'outline-secondary' : 'outline-primary',
-			disabled: disableAction,
-			onClick: () => console.log('edit entry')
+			variant: 'outline-primary',
+			onClick: () =>
+				updateUsersTableMode(usersTableMode === 'edit' ? 'read' : 'edit')
 		},
 		{
 			icon: 'bi-trash3',

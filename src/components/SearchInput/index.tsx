@@ -9,7 +9,13 @@ type SearchInputProps = FormControlProps & {
 const SearchInput: FC<SearchInputProps> = props => {
 	const { placeholder = 'Buscar...', ...restProps } = props
 
-	return <Form.Control placeholder={placeholder} {...restProps} />
+	return (
+		<Form.Control
+			placeholder={placeholder}
+			className='search-input'
+			{...restProps}
+		/>
+	)
 }
 
 export default SearchInput

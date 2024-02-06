@@ -6,7 +6,7 @@ import { Table } from '~/components'
 import { Filters, Header, Navbar } from './components'
 import { GetUsersContext, GetUsersProvider } from './context'
 
-const columns: TableColumns<User> = [
+const columns: TableColumns = [
 	{
 		id: 'name',
 		label: 'Nombre',
@@ -54,7 +54,9 @@ const Main = () => {
 		users,
 		selectUser,
 		selectAllUsers,
-		selectedUserIDs
+		selectedUserIDs,
+		usersTableMode,
+		handleUserInputsChange
 	} = useContext(GetUsersContext) as TGetUsersContext
 	const { open: expandedFilters, onToggle: toggleExpandedFilters } =
 		useDisclosure()
@@ -78,6 +80,7 @@ const Main = () => {
 						</div>
 					</Collapse>
 					<Table<User>
+						mode={usersTableMode}
 						enablePagination
 						loadingData={loadingUsers}
 						data={users}
@@ -88,6 +91,7 @@ const Main = () => {
 						selectItem={selectUser}
 						selectAllItems={selectAllUsers}
 						selectedItemIDs={selectedUserIDs}
+						onItemInputsChange={handleUserInputsChange}
 					/>
 				</Stack>
 			</Container>
