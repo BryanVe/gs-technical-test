@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
-import { Table as BSTable, Form, Spinner } from 'react-bootstrap'
-import { Pagination } from './components'
+import { ReactNode, useState } from 'react'
+import { Table as BSTable, Form, FormControlProps } from 'react-bootstrap'
+import { SearchInput } from '~/components'
+import { EmptyMessage, LoadingMessage, Pagination } from './components'
 import './styles.css'
 
 type TableProps<TDataItem extends TableDefaultDataItem> = {
@@ -29,9 +30,19 @@ function Table<TDataItem extends TableDefaultDataItem>(
 		updatePage,
 		updateResults
 	} = props
+	const [searchString, setSearchString] = useState('')
+	const filteredData = (data ?? []).filter(
+		item =>
+			JSON.stringify(item).toLowerCase().indexOf(searchString.toLowerCase()) >
+			-1
+	)
+
+	const handleSearchStringChange: FormControlProps['onChange'] = event =>
+		setSearchString(event.target.value)
 
 	return (
 		<>
+			<SearchInput value={searchString} onChange={handleSearchStringChange} />
 			<div
 				style={{
 					height,
@@ -52,7 +63,7 @@ function Table<TDataItem extends TableDefaultDataItem>(
 					</thead>
 					<tbody>
 						{!loadingData &&
-							(data ?? []).map(item => (
+							filteredData.map(item => (
 								<tr key={item.id}>
 									<td>
 										<Form.Check type='checkbox' />
@@ -72,19 +83,8 @@ function Table<TDataItem extends TableDefaultDataItem>(
 							))}
 					</tbody>
 				</BSTable>
-				{loadingData && (
-					<div
-						className='bg-white'
-						style={{
-							height: 264,
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center'
-						}}
-					>
-						<Spinner animation='border' />
-					</div>
-				)}
+				{loadingData && <LoadingMessage />}
+				{filteredData.length === 0 && <EmptyMessage />}
 			</div>
 			{data && enablePagination && (
 				<Pagination

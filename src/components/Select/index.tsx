@@ -1,10 +1,6 @@
 import { FC, useState } from 'react'
-import {
-	Dropdown,
-	DropdownProps,
-	Form,
-	FormControlProps
-} from 'react-bootstrap'
+import { Dropdown, DropdownProps, FormControlProps } from 'react-bootstrap'
+import { SearchInput } from '..'
 import './styles.css'
 
 type SelectProps = {
@@ -37,10 +33,9 @@ const Select: FC<SelectProps> = props => {
 			</Dropdown.Toggle>
 			<Dropdown.Menu className='w-100 mt-2'>
 				<div className='px-2'>
-					<Form.Control
+					<SearchInput
 						autoFocus
 						className='w-100 mb-3'
-						placeholder='Buscar...'
 						onChange={handleSearchStringChange}
 						value={searchString}
 					/>
