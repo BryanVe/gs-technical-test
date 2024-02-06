@@ -1,17 +1,13 @@
-import { FC } from 'react'
+import { useContext } from 'react'
 import { Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { Select } from '~/components'
 import { constants } from '~/config'
+import { GetUsersContext } from '../../context'
 
-type FiltersProps = {
-	gender: string
-	nat: string
-	updateGender: (gender: string) => void
-	updateNat: (nat: string) => void
-}
-
-const Filters: FC<FiltersProps> = props => {
-	const { gender, nat, updateGender, updateNat } = props
+const Filters = () => {
+	const { gender, nat, updateGender, updateNat } = useContext(
+		GetUsersContext
+	) as TGetUsersContext
 
 	return (
 		<Card border='0' className='shadow-sm'>
