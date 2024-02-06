@@ -14,8 +14,8 @@ const Button: FC<ButtonProps> = props => {
 
 	return (
 		<BSButton
-			size="sm"
-			variant="outline-primary"
+			size='sm'
+			variant='outline-primary'
 			className={['px-4', fullWidth ? 'w-100' : '', className].join(' ')}
 			{...restProps}
 		>

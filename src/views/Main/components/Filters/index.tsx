@@ -4,22 +4,22 @@ import { constants } from '~/config'
 
 const Filters = () => {
 	return (
-		<Card border="0" className="shadow-sm">
-			<Card.Body className="py-4">
+		<Card border='0' className='shadow-sm'>
+			<Card.Body className='py-4'>
 				<Form>
 					<Container>
-						<Row className="g-3">
+						<Row className='g-3'>
 							<Col xs={12} md>
-								<Select label="GÉNERO" options={constants.GENDERS} />
+								<Select label='GÉNERO' options={constants.GENDERS} />
 							</Col>
 							<Col xs={12} md>
 								<Select
-									label="NACIONALIDAD"
+									label='NACIONALIDAD'
 									options={constants.NATIONALITIES}
 								/>
 							</Col>
-							<Col xs={12} md="auto">
-								<Button fullWidth icon="bi-search" size="sm" variant="primary">
+							<Col xs={12} md='auto'>
+								<Button fullWidth icon='bi-search' size='sm' variant='primary'>
 									Buscar
 								</Button>
 							</Col>

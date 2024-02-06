@@ -11,9 +11,9 @@ const Navbar: FC<NavbarProps> = props => {
 	const { logoAlt, logoSrc, logoHeight = 30 } = props
 
 	return (
-		<BSNavbar expand="lg" bg="dark">
+		<BSNavbar expand='lg' bg='dark'>
 			<Container fluid>
-				<BSNavbar.Brand href="#" className="mx-auto">
+				<BSNavbar.Brand href='#' className='mx-auto'>
 					<Image src={logoSrc} alt={logoAlt} height={logoHeight} />
 				</BSNavbar.Brand>
 			</Container>

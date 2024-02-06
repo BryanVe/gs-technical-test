@@ -43,11 +43,11 @@ const Pagination: FC<PaginationProps> = props => {
 		<Row>
 			{results && (
 				<Col xs={12} md>
-					<Stack direction="horizontal" gap={2}>
-						<h6 className="mb-0"># registros:</h6>
+					<Stack direction='horizontal' gap={2}>
+						<h6 className='mb-0'># registros:</h6>
 						<Form.Select
-							size="sm"
-							className="w-auto"
+							size='sm'
+							className='w-auto'
 							onChange={handleResultsChange}
 						>
 							{constants.PAGE_SIZES.map(size => (
@@ -60,8 +60,8 @@ const Pagination: FC<PaginationProps> = props => {
 				</Col>
 			)}
 			{page && (
-				<Col xs={12} md="auto">
-					<BSPagination size="sm">
+				<Col xs={12} md='auto'>
+					<BSPagination size='sm'>
 						<BSPagination.First
 							disabled={disablePreviousPage}
 							onClick={setPreviousPage}

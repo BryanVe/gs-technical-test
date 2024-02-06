@@ -39,11 +39,11 @@ function Table<TDataItem extends TableDefaultDataItem>(
 					overflowY: 'auto'
 				}}
 			>
-				<BSTable hover responsive className="mb-0">
+				<BSTable hover responsive className='mb-0'>
 					<thead>
 						<tr>
 							<th>
-								<Form.Check type="checkbox" />
+								<Form.Check type='checkbox' />
 							</th>
 							{columns.map(column => (
 								<th key={column.id}>{column.label}</th>
@@ -55,7 +55,7 @@ function Table<TDataItem extends TableDefaultDataItem>(
 							(data ?? []).map(item => (
 								<tr key={item.id}>
 									<td>
-										<Form.Check type="checkbox" />
+										<Form.Check type='checkbox' />
 									</td>
 									{columns.map(column => (
 										<td
@@ -74,7 +74,7 @@ function Table<TDataItem extends TableDefaultDataItem>(
 				</BSTable>
 				{loadingData && (
 					<div
-						className="bg-white"
+						className='bg-white'
 						style={{
 							height: 264,
 							display: 'flex',
@@ -82,7 +82,7 @@ function Table<TDataItem extends TableDefaultDataItem>(
 							alignItems: 'center'
 						}}
 					>
-						<Spinner animation="border" />
+						<Spinner animation='border' />
 					</div>
 				)}
 			</div>

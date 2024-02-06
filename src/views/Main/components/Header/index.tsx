@@ -43,12 +43,12 @@ const Header: FC<HeaderProps> = props => {
 	return (
 		<Row>
 			<Col xs={12} md>
-				<h1 className="h2">
+				<h1 className='h2'>
 					<b>Mi tabla</b>
 				</h1>
 			</Col>
-			<Col xs={12} md="auto">
-				<Stack direction="horizontal" gap={2}>
+			<Col xs={12} md='auto'>
+				<Stack direction='horizontal' gap={2}>
 					{actions.map(({ icon, label, size, variant, onClick }) => (
 						<Button
 							key={icon}

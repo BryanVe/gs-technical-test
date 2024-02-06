@@ -73,7 +73,7 @@ const Main = () => {
 				logoAlt={constants.BRAND_NAME}
 				logoSrc={constants.BRAND_LOGO_SRC}
 			/>
-			<Container className="pt-5">
+			<Container className='pt-5'>
 				<Stack gap={4}>
 					<Header toggleExpandedFilters={toggleExpandedFilters} />
 					<Collapse in={expandedFilters}>

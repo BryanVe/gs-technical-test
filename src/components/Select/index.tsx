@@ -32,20 +32,20 @@ const Select: FC<SelectProps> = props => {
 
 	return (
 		<Dropdown onSelect={selectOption}>
-			<Dropdown.Toggle variant="outline-secondary">
+			<Dropdown.Toggle variant='outline-secondary'>
 				{selectedOption.toUpperCase()}
 			</Dropdown.Toggle>
-			<Dropdown.Menu className="w-100 mt-2">
-				<div className="px-2">
+			<Dropdown.Menu className='w-100 mt-2'>
+				<div className='px-2'>
 					<Form.Control
 						autoFocus
-						className="w-100 mb-3"
-						placeholder="Buscar..."
+						className='w-100 mb-3'
+						placeholder='Buscar...'
 						onChange={handleSearchStringChange}
 						value={searchString}
 					/>
 				</div>
-				<Dropdown.Header className="h6 px-4 bg-secondary text-bg-secondary">
+				<Dropdown.Header className='h6 px-4 bg-secondary text-bg-secondary'>
 					{label}
 				</Dropdown.Header>
 				{filteredOptions.map(option => (
@@ -53,7 +53,7 @@ const Select: FC<SelectProps> = props => {
 						key={option}
 						active={option === selectedOption}
 						eventKey={option}
-						className="px-4"
+						className='px-4'
 					>
 						{option.toUpperCase()}
 					</Dropdown.Item>
