@@ -14,7 +14,7 @@ const InternalButton: React.FC<InternalButtonProps> = props => {
 			className={['px-4', className].join(' ')}
 			{...restProps}
 		>
-			{icon && <i className={`me-1 bi ${icon}`} />}
+			{icon && <i className={`me-2 bi ${icon}`} />}
 			{children}
 		</Button>
 	)
