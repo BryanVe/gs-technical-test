@@ -11,6 +11,7 @@ type TableColumns = {
 	path?: string
 	sortable?: boolean
 	tdClassName?: string
+	minWidth?: number
 	thStyle?: React.HTMLProps<HTMLTableHeaderCellElement>['style']
 	tdStyle?: React.HTMLProps<HTMLTableDataCellElement>['style']
 }[]

@@ -11,57 +11,32 @@ const columns: TableColumns = [
 		id: 'name',
 		label: 'Nombre',
 		sortable: true,
-		thStyle: {
-			minWidth: 150
-		},
-		tdStyle: {
-			minWidth: 150
-		}
+		minWidth: 180
 	},
 	{
 		id: 'gender',
 		label: 'Género',
 		sortable: true,
-		tdClassName: 'text-capitalize',
-		thStyle: {
-			minWidth: 100
-		},
-		tdStyle: {
-			minWidth: 100
-		}
+		minWidth: 100,
+		tdClassName: 'text-capitalize'
 	},
 	{
 		id: 'email',
 		label: 'Correo electrónico',
 		sortable: true,
-		thStyle: {
-			minWidth: 150
-		},
-		tdStyle: {
-			minWidth: 150
-		}
+		minWidth: 150
 	},
 	{
 		id: 'cell',
 		label: 'Celular',
 		sortable: true,
-		thStyle: {
-			minWidth: 150
-		},
-		tdStyle: {
-			minWidth: 150
-		}
+		minWidth: 150
 	},
 	{
 		id: 'nat',
 		label: 'Nacionalidad',
 		sortable: true,
-		thStyle: {
-			minWidth: 140
-		},
-		tdStyle: {
-			minWidth: 140
-		}
+		minWidth: 140
 	}
 ]
 

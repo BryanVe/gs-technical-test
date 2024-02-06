@@ -102,7 +102,9 @@ function Table<TDataItem extends TableDefaultDataItem>(
 												: 'th-desc'
 											: ''
 									].join(' ')}
-									style={column.thStyle}
+									style={{
+										minWidth: column.minWidth
+									}}
 									onClick={() => {
 										setSortField(column.id)
 										setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
@@ -128,7 +130,9 @@ function Table<TDataItem extends TableDefaultDataItem>(
 										<td
 											key={column.id}
 											className={column.tdClassName}
-											style={column.tdStyle}
+											style={{
+												minWidth: column.minWidth
+											}}
 										>
 											{mode === 'read' ? (
 												(item[column.id] as ReactNode)
