@@ -8,6 +8,7 @@ import {
 	FormSelectProps
 } from 'react-bootstrap'
 import { constants } from '~/config'
+import './style.css'
 
 type PaginationProps = {
 	page?: string
@@ -40,9 +41,9 @@ const Pagination: FC<PaginationProps> = props => {
 		updateResults(event.target.value)
 
 	return (
-		<Row>
+		<Row className='g-2'>
 			{results && (
-				<Col xs={12} md>
+				<Col xs={12} sm className='center-sm'>
 					<Stack direction='horizontal' gap={2}>
 						<h6 className='mb-0'># registros:</h6>
 						<Form.Select
@@ -60,7 +61,7 @@ const Pagination: FC<PaginationProps> = props => {
 				</Col>
 			)}
 			{page && (
-				<Col xs={12} md='auto'>
+				<Col xs={12} sm='auto' className='center-sm'>
 					<BSPagination size='sm'>
 						<BSPagination.First
 							disabled={disablePreviousPage}

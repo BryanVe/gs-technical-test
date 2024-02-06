@@ -1,0 +1,6 @@
+@media (width < 576px) {
+	.center-sm {
+		display: flex;
+		justify-content: center;
+	}
+}
