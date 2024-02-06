@@ -47,7 +47,9 @@ const Pagination: FC<PaginationProps> = props => {
 								fontSize: 14
 							}}
 						>
-							{count} registros encontrados
+							{count > 0
+								? `${count} registros encontrados`
+								: 'No se encontró resultados'}
 						</h6>
 					</Stack>
 					<Stack direction='horizontal' gap={2}>
@@ -57,7 +59,7 @@ const Pagination: FC<PaginationProps> = props => {
 								fontSize: 14
 							}}
 						>
-							Entradas por página:
+							Registros por página:
 						</h6>
 						<Form.Select
 							size='sm'

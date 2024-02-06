@@ -12,7 +12,9 @@ const Message: FC<MessageProps> = props => {
 				height: 264,
 				display: 'flex',
 				justifyContent: 'center',
-				alignItems: 'center'
+				alignItems: 'center',
+				gap: '1rem',
+				flexDirection: 'column'
 			}}
 		>
 			{children}
