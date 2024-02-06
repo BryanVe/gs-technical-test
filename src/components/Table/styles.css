@@ -1,9 +1,43 @@
 .table {
 	font-size: 0.81rem;
+
+	thead tr th {
+		background-color: #d3dbdb82;
+		cursor: pointer;
+		font-weight: 500;
+	}
 }
 
-.table thead tr th {
-	background-color: #d3dbdb82;
-	cursor: pointer;
-	font-weight: 500;
+.th-sortable {
+	position: relative;
+
+	&::before {
+		content: '▲';
+		position: absolute;
+		color: black;
+		bottom: 45%;
+		opacity: 0.125;
+		right: 0.625rem;
+		line-height: 0.56rem;
+		font-size: 0.65rem;
+	}
+
+	&::after {
+		content: '▼';
+		position: absolute;
+		color: black;
+		top: 55%;
+		opacity: 0.125;
+		right: 0.625rem;
+		line-height: 0.56rem;
+		font-size: 0.65rem;
+	}
+}
+
+.th-asc::before {
+	opacity: 0.6;
+}
+
+.th-desc::after {
+	opacity: 0.6;
 }

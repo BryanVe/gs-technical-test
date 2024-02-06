@@ -38,12 +38,26 @@ function Table<TDataItem extends TableDefaultDataItem>(
 		selectAllItems,
 		onItemInputsChange
 	} = props
+	const [sortField, setSortField] = useState<keyof TDataItem>(columns[0].id)
+	const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
 	const [searchString, setSearchString] = useState('')
 	const filteredData = (data ?? []).filter(
 		item =>
 			JSON.stringify(item).toLowerCase().indexOf(searchString.toLowerCase()) >
 			-1
 	)
+	const getOrderedData = () => {
+		const data = [...filteredData].sort((firstItem, secondItem) => {
+			if (firstItem[sortField] < secondItem[sortField])
+				return sortDirection === 'asc' ? -1 : 1
+			if (firstItem[sortField] > secondItem[sortField])
+				return sortDirection === 'asc' ? 1 : -1
+
+			return 0
+		})
+
+		return data
+	}
 
 	const handleSearchStringChange: FormControlProps['onChange'] = event =>
 		setSearchString(event.target.value)
@@ -73,7 +87,23 @@ function Table<TDataItem extends TableDefaultDataItem>(
 								/>
 							</th>
 							{columns.map(column => (
-								<th key={column.id} style={column.thStyle}>
+								<th
+									key={column.id}
+									className={[
+										'user-select-none',
+										column.sortable ? 'th-sortable' : '',
+										sortField === column.id
+											? sortDirection === 'asc'
+												? 'th-asc'
+												: 'th-desc'
+											: ''
+									].join(' ')}
+									style={column.thStyle}
+									onClick={() => {
+										setSortField(column.id)
+										setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+									}}
+								>
 									{column.label}
 								</th>
 							))}
@@ -81,7 +111,7 @@ function Table<TDataItem extends TableDefaultDataItem>(
 					</thead>
 					<tbody>
 						{!loadingData &&
-							filteredData.map(item => (
+							getOrderedData().map(item => (
 								<tr key={item.id}>
 									<td>
 										<Form.Check
