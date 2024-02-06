@@ -41,7 +41,7 @@ const Header: FC<HeaderProps> = props => {
 	]
 
 	return (
-		<Row>
+		<Row className='g-2'>
 			<Col xs={12} md>
 				<h1 className='h2'>
 					<b>Mi tabla</b>
