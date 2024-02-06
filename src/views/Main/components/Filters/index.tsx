@@ -1,8 +1,18 @@
+import { FC } from 'react'
 import { Card, Col, Container, Form, Row } from 'react-bootstrap'
-import { Button, Select } from '~/components'
+import { Select } from '~/components'
 import { constants } from '~/config'
 
-const Filters = () => {
+type FiltersProps = {
+	gender: string
+	nat: string
+	updateGender: (gender: string) => void
+	updateNat: (nat: string) => void
+}
+
+const Filters: FC<FiltersProps> = props => {
+	const { gender, nat, updateGender, updateNat } = props
+
 	return (
 		<Card border='0' className='shadow-sm'>
 			<Card.Body className='py-4'>
@@ -10,18 +20,20 @@ const Filters = () => {
 					<Container>
 						<Row className='g-3'>
 							<Col xs={12} md>
-								<Select label='GÉNERO' options={constants.GENDERS} />
+								<Select
+									label='GÉNERO'
+									options={constants.GENDERS}
+									onSelect={updateGender}
+									value={gender}
+								/>
 							</Col>
 							<Col xs={12} md>
 								<Select
 									label='NACIONALIDAD'
 									options={constants.NATIONALITIES}
+									onSelect={updateNat}
+									value={nat}
 								/>
-							</Col>
-							<Col xs={12} md='auto'>
-								<Button fullWidth icon='bi-search' size='sm' variant='primary'>
-									Buscar
-								</Button>
 							</Col>
 						</Row>
 					</Container>

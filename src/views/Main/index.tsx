@@ -40,16 +40,26 @@ const columns: TableColumns<User> = [
 const Main = () => {
 	const { open: expandedFilters, onToggle: toggleExpandedFilters } =
 		useDisclosure()
-	const [searchParams, setSearchParams] = useState<GetUsersParams>({
+	const [searchParams, setSearchParams] = useState<Required<GetUsersParams>>({
 		page: '1',
-		results: constants.PAGE_SIZES[0]
+		results: constants.PAGE_SIZES[0],
+		gender: constants.GENDERS[0],
+		nat: constants.NATIONALITIES[0]
 	})
 	const { data: users, isLoading: loadingUsers } = useQuery({
-		queryKey: ['getUsers', searchParams.page, searchParams.results],
+		queryKey: [
+			'getUsers',
+			searchParams.page,
+			searchParams.results,
+			searchParams.gender,
+			searchParams.nat
+		],
 		queryFn: async ({ queryKey }) => {
 			return await getUsers({
 				page: queryKey[1],
-				results: queryKey[2]
+				results: queryKey[2],
+				gender: queryKey[3] !== 'all' ? queryKey[3] : undefined,
+				nat: queryKey[4] !== 'all' ? queryKey[4] : undefined
 			})
 		},
 		refetchOnWindowFocus: false,
@@ -67,6 +77,10 @@ const Main = () => {
 	const updateResults = (results: string) =>
 		updateSearchParams('results', results)
 
+	const updateGender = (gender: string) => updateSearchParams('gender', gender)
+
+	const updateNat = (nat: string) => updateSearchParams('nat', nat)
+
 	return (
 		<>
 			<Navbar
@@ -82,7 +96,12 @@ const Main = () => {
 							Ref: https://react-bootstrap.netlify.app/docs/utilities/transitions#horizontal 
 						*/}
 						<div>
-							<Filters />
+							<Filters
+								gender={searchParams.gender}
+								nat={searchParams.nat}
+								updateGender={updateGender}
+								updateNat={updateNat}
+							/>
 						</div>
 					</Collapse>
 					<Table<User>
@@ -91,7 +110,6 @@ const Main = () => {
 						data={users}
 						columns={columns}
 						page={searchParams.page}
-						results={searchParams.results}
 						updatePage={updatePage}
 						updateResults={updateResults}
 					/>

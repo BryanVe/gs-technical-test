@@ -6,11 +6,12 @@ import './styles.css'
 type SelectProps = {
 	options: string[]
 	label: string
+	value: string
+	onSelect: (value: string) => void
 }
 
 const Select: FC<SelectProps> = props => {
-	const { options, label } = props
-	const [selectedOption, setSelectedOption] = useState(options[0])
+	const { options, label, onSelect, value } = props
 	const [searchString, setSearchString] = useState('')
 
 	const filteredOptions = options.filter(
@@ -19,7 +20,7 @@ const Select: FC<SelectProps> = props => {
 	)
 
 	const selectOption: DropdownProps['onSelect'] = option => {
-		setSelectedOption(option as string)
+		onSelect(option as string)
 		setSearchString('')
 	}
 
@@ -29,7 +30,7 @@ const Select: FC<SelectProps> = props => {
 	return (
 		<Dropdown onSelect={selectOption}>
 			<Dropdown.Toggle variant='outline-secondary'>
-				{selectedOption.toUpperCase()}
+				{value.toUpperCase()}
 			</Dropdown.Toggle>
 			<Dropdown.Menu className='w-100 mt-2'>
 				<div className='px-2'>
@@ -46,7 +47,7 @@ const Select: FC<SelectProps> = props => {
 				{filteredOptions.map(option => (
 					<Dropdown.Item
 						key={option}
-						active={option === selectedOption}
+						active={option === value}
 						eventKey={option}
 						className='px-4'
 					>

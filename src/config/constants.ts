@@ -1,7 +1,8 @@
 export const BRAND_LOGO_SRC = 'https://logo.clearbit.com/clearbit.com'
 export const BRAND_NAME = 'Logo de la empresa'
-export const GENDERS = ['female', 'male']
+export const GENDERS = ['all', 'female', 'male']
 export const NATIONALITIES = [
+	'all',
 	'AU',
 	'BR',
 	'CA',

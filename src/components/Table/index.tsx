@@ -10,8 +10,7 @@ type TableProps<TDataItem extends TableDefaultDataItem> = {
 	data?: TDataItem[]
 	height?: number
 	enablePagination?: boolean
-	page?: string
-	results?: string
+	page: string
 	updatePage: (page: string) => void
 	updateResults: (results: string) => void
 }
@@ -26,7 +25,6 @@ function Table<TDataItem extends TableDefaultDataItem>(
 		data,
 		height = 300,
 		page,
-		results,
 		updatePage,
 		updateResults
 	} = props
@@ -89,7 +87,6 @@ function Table<TDataItem extends TableDefaultDataItem>(
 			{data && enablePagination && (
 				<Pagination
 					page={page}
-					results={results}
 					updatePage={updatePage}
 					updateResults={updateResults}
 				/>
