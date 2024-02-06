@@ -9,17 +9,17 @@ const Filters = () => {
 				<Form>
 					<Container>
 						<Row className="g-3">
-							<Col md={12} lg>
+							<Col xs={12} md>
 								<Select label="GÉNERO" options={constants.GENDERS} />
 							</Col>
-							<Col md={12} lg>
+							<Col xs={12} md>
 								<Select
 									label="NACIONALIDAD"
 									options={constants.NATIONALITIES}
 								/>
 							</Col>
-							<Col xs={12}>
-								<Button icon="bi-search" size="sm" variant="primary">
+							<Col xs={12} md="auto">
+								<Button fullWidth icon="bi-search" size="sm" variant="primary">
 									Buscar
 								</Button>
 							</Col>

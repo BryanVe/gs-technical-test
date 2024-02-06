@@ -1,23 +1,28 @@
-import { Button, ButtonProps } from 'react-bootstrap'
+import { FC } from 'react'
+import {
+	Button as BSButton,
+	ButtonProps as BSButtonProps
+} from 'react-bootstrap'
 
-type InternalButtonProps = ButtonProps & {
+type ButtonProps = BSButtonProps & {
 	icon?: string
+	fullWidth?: boolean
 }
 
-const InternalButton: React.FC<InternalButtonProps> = props => {
-	const { children, className, icon, ...restProps } = props
+const Button: FC<ButtonProps> = props => {
+	const { children, className, fullWidth = false, icon, ...restProps } = props
 
 	return (
-		<Button
+		<BSButton
 			size="sm"
 			variant="outline-primary"
-			className={['px-4', className].join(' ')}
+			className={['px-4', fullWidth ? 'w-100' : '', className].join(' ')}
 			{...restProps}
 		>
 			{icon && <i className={`me-2 bi ${icon}`} />}
 			{children}
-		</Button>
+		</BSButton>
 	)
 }
 
-export default InternalButton
+export default Button

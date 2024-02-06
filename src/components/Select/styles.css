@@ -1,11 +1,6 @@
-.dropdown {
-	flex-grow: 1;
-}
-
 .dropdown .dropdown-toggle {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
 	border: none;
 	background-color: #f7f7f7 !important;
 	color: gray !important;

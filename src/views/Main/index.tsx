@@ -2,9 +2,8 @@
 // import { useQuery } from '@tanstack/react-query'
 
 import { Container } from 'react-bootstrap'
-import { Navbar } from '~/components'
 import { constants } from '~/config'
-import { Filters } from './components'
+import { Filters, Navbar } from './components'
 
 const Main = () => {
 	// const { data: users, isLoading: isLoadingUsers } = useQuery({
