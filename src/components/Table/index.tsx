@@ -156,7 +156,9 @@ function Table<TDataItem extends TableDefaultDataItem>(
 					</tbody>
 				</BSTable>
 				{loadingData && <LoadingMessage />}
-				{filteredData.length === 0 && <EmptyMessage />}
+				{filteredData.length === 0 && (
+					<EmptyMessage message='No se encontró resultados' />
+				)}
 			</div>
 			{enablePagination && (
 				<Pagination
