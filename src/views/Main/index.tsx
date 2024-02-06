@@ -3,7 +3,7 @@ import { Collapse, Container, Stack } from 'react-bootstrap'
 import { constants } from '~/config'
 import { useDisclosure } from '~/hooks'
 import { Table } from '~/components'
-import { Filters, Header, Navbar } from './components'
+import { ErrorModal, Filters, Header, Navbar } from './components'
 import { GetUsersContext, GetUsersProvider } from './context'
 
 const columns: TableColumns = [
@@ -90,6 +90,7 @@ const Main = () => {
 					/>
 				</Stack>
 			</Container>
+			<ErrorModal defaultMessage='Ocurrió un error al obtener los usuarios' />
 		</>
 	)
 }

@@ -12,4 +12,7 @@ type TGetUsersContext = Required<GetUsersParams> & {
 	updateUsersTableMode: (mode: TableMode) => void
 	usersTableMode: TableMode
 	handleUserInputsChange: (user: User, key: string, value: string) => void
+	errorModalOpened: boolean
+	closeErrorModal: () => void
+	errorUserMessage?: string
 }

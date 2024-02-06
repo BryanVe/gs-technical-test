@@ -1,6 +1,8 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { FC, PropsWithChildren, createContext, useState } from 'react'
 import { constants } from '~/config'
+import { useDisclosure } from '~/hooks'
 import { getUsers } from '~/network'
 
 export const GetUsersContext = createContext<TGetUsersContext | null>(null)
@@ -9,6 +11,12 @@ type GetUsersProviderProps = PropsWithChildren
 
 export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 	const { children } = props
+	const {
+		open: errorModalOpened,
+		onOpen: openErrorModal,
+		onClose: closeErrorModal
+	} = useDisclosure()
+	const [errorUserMessage, setErrorUserMessage] = useState<string>()
 	const [searchParams, setSearchParams] = useState<Required<GetUsersParams>>({
 		page: '1',
 		results: constants.PAGE_SIZES[0],
@@ -28,20 +36,32 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 			searchParams.nat
 		],
 		queryFn: async ({ queryKey }) => {
-			const users = await getUsers({
-				page: queryKey[1],
-				results: queryKey[2],
-				gender: queryKey[3] !== 'all' ? queryKey[3] : undefined,
-				nat: queryKey[4] !== 'all' ? queryKey[4] : undefined
-			})
+			try {
+				const users = await getUsers({
+					page: queryKey[1],
+					results: queryKey[2],
+					gender: queryKey[3] !== 'all' ? queryKey[3] : undefined,
+					nat: queryKey[4] !== 'all' ? queryKey[4] : undefined
+				})
 
-			setEditableUsers(
-				users.reduce<Record<string, User>>((result, user) => {
-					result[user.id] = user
-					return result
-				}, {})
-			)
-			return users
+				setEditableUsers(
+					users.reduce<Record<string, User>>((result, user) => {
+						result[user.id] = user
+						return result
+					}, {})
+				)
+				return users
+			} catch (error) {
+				let message
+
+				if (error instanceof AxiosError)
+					message = (error.response?.data as ApiErrorResponse).error
+				else if (error instanceof Error) message = error.message
+
+				setErrorUserMessage(message)
+				openErrorModal()
+				return null
+			}
 		},
 		refetchOnWindowFocus: false,
 		placeholderData: keepPreviousData
@@ -130,7 +150,10 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 				removeUsers,
 				usersTableMode,
 				updateUsersTableMode,
-				handleUserInputsChange
+				handleUserInputsChange,
+				errorModalOpened,
+				closeErrorModal,
+				errorUserMessage
 			}}
 		>
 			{children}
