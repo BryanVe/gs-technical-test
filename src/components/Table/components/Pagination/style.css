@@ -2,5 +2,10 @@
 	.center-sm {
 		display: flex;
 		justify-content: center;
+
+		.hstack {
+			display: flex;
+			justify-content: center;
+		}
 	}
 }

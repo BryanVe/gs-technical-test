@@ -15,7 +15,10 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 		gender: constants.GENDERS[0],
 		nat: constants.NATIONALITIES[0]
 	})
-	const { data: users, isLoading: loadingUsers } = useQuery({
+	const [selectedUserIDs, setSelectedUserIDs] = useState<string[]>([])
+	const [editableUsers, setEditableUsers] = useState<Record<string, User>>({})
+	const editableUsersAsArray = Object.values(editableUsers)
+	const { isLoading: loadingUsers } = useQuery({
 		queryKey: [
 			'getUsers',
 			searchParams.page,
@@ -24,12 +27,20 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 			searchParams.nat
 		],
 		queryFn: async ({ queryKey }) => {
-			return await getUsers({
+			const users = await getUsers({
 				page: queryKey[1],
 				results: queryKey[2],
 				gender: queryKey[3] !== 'all' ? queryKey[3] : undefined,
 				nat: queryKey[4] !== 'all' ? queryKey[4] : undefined
 			})
+
+			setEditableUsers(
+				users.reduce<Record<string, User>>((result, user) => {
+					result[user.id] = user
+					return result
+				}, {})
+			)
+			return users
 		},
 		refetchOnWindowFocus: false,
 		placeholderData: keepPreviousData
@@ -53,6 +64,36 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 	const updateNat: TGetUsersContext['updateNat'] = nat =>
 		updateSearchParams('nat', nat)
 
+	const selectUser = (user: User) => {
+		const isSelected = selectedUserIDs.includes(user.id)
+		let newSelectedUserIDs: string[] = []
+
+		if (isSelected)
+			newSelectedUserIDs = selectedUserIDs.filter(id => id !== user.id)
+		else newSelectedUserIDs = selectedUserIDs.concat(user.id)
+
+		setSelectedUserIDs(newSelectedUserIDs)
+	}
+
+	const selectAllUsers = () => {
+		let newSelectedUserIDs: string[] = []
+
+		if (selectedUserIDs.length !== editableUsersAsArray.length)
+			newSelectedUserIDs = editableUsersAsArray.map(user => user.id)
+
+		setSelectedUserIDs(newSelectedUserIDs)
+	}
+
+	const removeUsers = () => {
+		const newEditableUsers = { ...editableUsers }
+
+		for (const userID of selectedUserIDs) {
+			delete newEditableUsers[userID]
+		}
+
+		setEditableUsers(newEditableUsers)
+	}
+
 	return (
 		<GetUsersContext.Provider
 			value={{
@@ -61,8 +102,12 @@ export const GetUsersProvider: FC<GetUsersProviderProps> = props => {
 				updateResults,
 				updateGender,
 				updateNat,
-				users,
-				loadingUsers
+				users: editableUsersAsArray,
+				loadingUsers,
+				selectUser,
+				selectAllUsers,
+				selectedUserIDs,
+				removeUsers
 			}}
 		>
 			{children}

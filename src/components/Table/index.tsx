@@ -13,6 +13,9 @@ type TableProps<TDataItem extends TableDefaultDataItem> = {
 	page: string
 	updatePage: (page: string) => void
 	updateResults: (results: string) => void
+	selectItem: (item: TDataItem) => void
+	selectAllItems: () => void
+	selectedItemIDs: string[]
 }
 
 function Table<TDataItem extends TableDefaultDataItem>(
@@ -26,7 +29,10 @@ function Table<TDataItem extends TableDefaultDataItem>(
 		height = 300,
 		page,
 		updatePage,
-		updateResults
+		updateResults,
+		selectItem,
+		selectAllItems,
+		selectedItemIDs
 	} = props
 	const [searchString, setSearchString] = useState('')
 	const filteredData = (data ?? []).filter(
@@ -52,7 +58,15 @@ function Table<TDataItem extends TableDefaultDataItem>(
 					<thead>
 						<tr>
 							<th>
-								<Form.Check type='checkbox' />
+								<Form.Check
+									type='checkbox'
+									onChange={selectAllItems}
+									checked={
+										data &&
+										data.length > 0 &&
+										selectedItemIDs.length === data.length
+									}
+								/>
 							</th>
 							{columns.map(column => (
 								<th key={column.id} style={column.thStyle}>
@@ -66,7 +80,11 @@ function Table<TDataItem extends TableDefaultDataItem>(
 							filteredData.map(item => (
 								<tr key={item.id}>
 									<td>
-										<Form.Check type='checkbox' />
+										<Form.Check
+											type='checkbox'
+											onChange={() => selectItem(item)}
+											checked={selectedItemIDs.includes(item.id)}
+										/>
 									</td>
 									{columns.map(column => (
 										<td
@@ -86,8 +104,9 @@ function Table<TDataItem extends TableDefaultDataItem>(
 				{loadingData && <LoadingMessage />}
 				{filteredData.length === 0 && <EmptyMessage />}
 			</div>
-			{data && enablePagination && (
+			{enablePagination && (
 				<Pagination
+					count={filteredData.length}
 					page={page}
 					updatePage={updatePage}
 					updateResults={updateResults}

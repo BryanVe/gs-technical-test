@@ -1,12 +1,14 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { ButtonProps, Col, Row, Stack } from 'react-bootstrap'
 import { Button } from '~/components'
+import { GetUsersContext } from '../../context'
 
 type Action = {
 	icon: string
 	label: string
 	size: ButtonProps['size']
 	variant: ButtonProps['variant']
+	disabled?: ButtonProps['disabled']
 	onClick: ButtonProps['onClick']
 }
 
@@ -16,6 +18,10 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = props => {
 	const { toggleExpandedFilters } = props
+	const { selectedUserIDs, removeUsers } = useContext(
+		GetUsersContext
+	) as TGetUsersContext
+	const disableAction = selectedUserIDs.length === 0
 	const actions: Action[] = [
 		{
 			icon: 'bi-sliders',
@@ -28,15 +34,17 @@ const Header: FC<HeaderProps> = props => {
 			icon: 'bi-pencil',
 			label: 'Editar',
 			size: 'sm',
-			variant: 'outline-primary',
+			variant: disableAction ? 'outline-secondary' : 'outline-primary',
+			disabled: disableAction,
 			onClick: () => console.log('edit entry')
 		},
 		{
 			icon: 'bi-trash3',
 			label: 'Eliminar',
 			size: 'sm',
-			variant: 'outline-danger',
-			onClick: () => console.log('delete entry')
+			variant: disableAction ? 'outline-secondary' : 'outline-danger',
+			disabled: disableAction,
+			onClick: removeUsers
 		}
 	]
 
@@ -49,11 +57,12 @@ const Header: FC<HeaderProps> = props => {
 			</Col>
 			<Col xs={12} md='auto'>
 				<Stack direction='horizontal' gap={2}>
-					{actions.map(({ icon, label, size, variant, onClick }) => (
+					{actions.map(({ icon, label, size, variant, disabled, onClick }) => (
 						<Button
 							key={icon}
 							icon={icon}
 							size={size}
+							disabled={disabled}
 							variant={variant}
 							onClick={onClick}
 						>

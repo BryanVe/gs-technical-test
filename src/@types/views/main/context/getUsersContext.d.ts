@@ -3,6 +3,10 @@ type TGetUsersContext = Required<GetUsersParams> & {
 	updateResults: (results: string) => void
 	updateGender: (gender: string) => void
 	updateNat: (nat: string) => void
-	users: User[] | undefined
+	users: User[]
 	loadingUsers: boolean
+	selectUser: (user: User) => void
+	selectAllUsers: () => void
+	selectedUserIDs: string[]
+	removeUsers: () => void
 }

@@ -11,13 +11,14 @@ import { constants } from '~/config'
 import './style.css'
 
 type PaginationProps = {
+	count: number
 	page: string
 	updatePage: (page: string) => void
 	updateResults: (results: string) => void
 }
 
 const Pagination: FC<PaginationProps> = props => {
-	const { page, updatePage, updateResults } = props
+	const { count, page, updatePage, updateResults } = props
 	const disablePreviousPage = parseInt(page) - 1 < 1
 
 	const setPreviousPage = () => {
@@ -38,19 +39,38 @@ const Pagination: FC<PaginationProps> = props => {
 	return (
 		<Row className='g-2'>
 			<Col xs={12} sm className='center-sm'>
-				<Stack direction='horizontal' gap={2}>
-					<h6 className='mb-0'># registros:</h6>
-					<Form.Select
-						size='sm'
-						className='w-auto'
-						onChange={handleResultsChange}
-					>
-						{constants.PAGE_SIZES.map(size => (
-							<option key={size} value={size}>
-								{size}
-							</option>
-						))}
-					</Form.Select>
+				<Stack gap={1}>
+					<Stack direction='horizontal' gap={2}>
+						<h6
+							className='mb-0'
+							style={{
+								fontSize: 14
+							}}
+						>
+							{count} registros encontrados
+						</h6>
+					</Stack>
+					<Stack direction='horizontal' gap={2}>
+						<h6
+							className='mb-0'
+							style={{
+								fontSize: 14
+							}}
+						>
+							Entradas por página:
+						</h6>
+						<Form.Select
+							size='sm'
+							className='w-auto'
+							onChange={handleResultsChange}
+						>
+							{constants.PAGE_SIZES.map(size => (
+								<option key={size} value={size}>
+									{size}
+								</option>
+							))}
+						</Form.Select>
+					</Stack>
 				</Stack>
 			</Col>
 			<Col xs={12} sm='auto' className='center-sm'>

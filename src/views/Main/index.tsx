@@ -46,9 +46,16 @@ const columns: TableColumns<User> = [
 ]
 
 const Main = () => {
-	const { loadingUsers, page, updatePage, updateResults, users } = useContext(
-		GetUsersContext
-	) as TGetUsersContext
+	const {
+		loadingUsers,
+		page,
+		updatePage,
+		updateResults,
+		users,
+		selectUser,
+		selectAllUsers,
+		selectedUserIDs
+	} = useContext(GetUsersContext) as TGetUsersContext
 	const { open: expandedFilters, onToggle: toggleExpandedFilters } =
 		useDisclosure()
 
@@ -78,6 +85,9 @@ const Main = () => {
 						page={page}
 						updatePage={updatePage}
 						updateResults={updateResults}
+						selectItem={selectUser}
+						selectAllItems={selectAllUsers}
+						selectedItemIDs={selectedUserIDs}
 					/>
 				</Stack>
 			</Container>

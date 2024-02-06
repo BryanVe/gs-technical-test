@@ -8,7 +8,7 @@ const EmptyMessage = () => (
 				fontSize: '0.85em'
 			}}
 		>
-			No se encontró usuarios
+			No hay resultados
 		</p>
 	</Message>
 )
