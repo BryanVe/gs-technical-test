@@ -1,29 +1,31 @@
-.dropdown .dropdown-toggle {
-	display: flex;
-	align-items: center;
-	border: none;
-	background-color: #f7f7f7 !important;
-	color: gray !important;
-	width: 100%;
-	font-size: 0.875rem;
-}
+.dropdown {
+	.dropdown-toggle {
+		display: flex;
+		align-items: center;
+		border: none;
+		background-color: #f7f7f7 !important;
+		color: gray !important;
+		width: 100%;
+		font-size: 0.875rem;
+	}
 
-.dropdown .dropdown-toggle::after {
-	background-repeat: no-repeat;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%230b5ed7' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
-	border: 0 !important;
-	width: 1rem !important;
-	height: 0.75rem !important;
-	position: absolute;
-	right: 0.76rem;
-}
+	.dropdown-toggle::after {
+		background-repeat: no-repeat;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%230b5ed7' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+		border: 0 !important;
+		width: 1rem !important;
+		height: 0.75rem !important;
+		position: absolute;
+		right: 0.76rem;
+	}
 
-.dropdown .dropdown-header {
-	font-size: 0.81rem;
-}
+	.dropdown-header {
+		font-size: 0.81rem;
+	}
 
-.dropdown .dropdown-item {
-	font-size: 0.78rem;
+	.dropdown-item {
+		font-size: 0.78rem;
+	}
 }
 
 .dropdown-menu.show {
