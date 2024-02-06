@@ -24,3 +24,4 @@ export const NATIONALITIES = [
 	'UA',
 	'US'
 ]
+export const PAGE_SIZES = ['10', '20', '30']

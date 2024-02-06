@@ -1,0 +1,9 @@
+.table {
+	font-size: 0.81rem;
+}
+
+.table thead tr th {
+	background-color: #d3dbdb82;
+	cursor: pointer;
+	font-weight: 500;
+}

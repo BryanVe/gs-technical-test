@@ -1,0 +1,1 @@
+type GetUsersResponse = ApiSuccessResponse<UserDTO[]>
